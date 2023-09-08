@@ -18,6 +18,7 @@ jobs:
           ssh-key-name: "eliveltonmarques@git"
           hcloud-token: ${{ secrets.HCLOUD_TOKEN }}
           startup-timeout: 40000
+          delete-server: false
       - uses: webfactory/ssh-agent@v0.5.0
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
