@@ -1,24 +1,11 @@
-name: Github CI
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
-
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: Ubuntu-20.04
     steps:
-      - name: Checkout do repositorio
-        uses: actions/checkout@v1
-      - name: Deploy with rsync
-        run: rsync -avz . ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}://www/wwwroot/dev/
-      - name: Deploy on hetzner
-        uses: easingthemes/ssh-deploy@main
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          ARGS: "-rltgoDzvO --delete"
-          SOURCE: "."
-          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-          REMOTE_USER: ${{ secrets.REMOTE_USER }}
-          TARGET: ${{ secrets.TARGET }}
+      - uses: TimDaub/hetzner-cloud-deploy-server-action@v2
+        with:
+          server-name: "gh-actions-server"
+          server-image: "ubuntu-20.04"
+          server-type: "cx11"
+          ssh-key-name: "my key name"
+          hcloud-token: ${{ secrets.HCLOUD_TOKEN }}
