@@ -12,7 +12,7 @@ jobs:
       - name: Checkout do repositorio
         uses: actions/checkout@v1
       - name: Deploy with rsync
-        run: rsync -avz ./dist/ ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}://www/wwwroot/dev/
+        run: rsync -avz . ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}://www/wwwroot/dev/
       - name: Deploy on hetzner
         uses: easingthemes/ssh-deploy@main
         env:
