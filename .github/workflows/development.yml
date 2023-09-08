@@ -15,7 +15,7 @@ jobs:
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           ARGS: "-o StrictHostKeyChecking=no"
-          SOURCE: "."  # Você pode deixar como está ou especificar uma pasta se desejar
+          SOURCE: "./www/wwwroot"  # Você pode deixar como está ou especificar uma pasta se desejar
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
           TARGET: ${{ secrets.TARGET }}
