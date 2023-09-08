@@ -1,5 +1,4 @@
-name: Teste de Conexão SSH
-
+name: Github CI
 on:
   push:
     branches: [ master ]
@@ -7,15 +6,17 @@ on:
     branches: [ master ]
 
 jobs:
-  test-ssh-connection:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Teste de Conexão SSH
+      - name: Checkout do repositorio
+        uses: actions/checkout@v1
+      - name: Deploy on hetzner
         uses: easingthemes/ssh-deploy@main
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          ARGS: "-o StrictHostKeyChecking=no"
-          SOURCE: "./www/wwwroot"  # Você pode deixar como está ou especificar uma pasta se desejar
+          ARGS: "-rltgoDzvO --delete"
+          SOURCE: "."
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
           TARGET: ${{ secrets.TARGET }}
