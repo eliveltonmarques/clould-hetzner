@@ -9,8 +9,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      -name: Adding known hosts
+        run: ssh-keyscan -H ${{ secrets.SERVER_SSH_HOST }} >> ~/.ssh/known_hosts
       - name: Checkout do repositorio
         uses: actions/checkout@v1
+      - name: Deploy with rsync
+        run: rsync -avz ./dist/ ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}://www/wwwroot/dev/
       - name: Deploy on hetzner
         uses: easingthemes/ssh-deploy@main
         env:
