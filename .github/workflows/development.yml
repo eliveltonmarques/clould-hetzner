@@ -15,7 +15,7 @@ jobs:
           server-name: "eliveltontech"
           server-image: "ubuntu-20.04"
           server-type: "cx31"
-          ssh-key-name: "github"
+          ssh-key-name: "eliveltonmarques@git"
           hcloud-token: ${{ secrets.HCLOUD_TOKEN }}
           startup-timeout: 40000
           floating-ip-id: 35149067
