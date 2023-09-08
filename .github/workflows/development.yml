@@ -14,7 +14,6 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
       - run: mkdir -p ~/.ssh && ssh-keyscan -H 95.216.137.189 >> ~/.ssh/known_hosts
-      - run: ssh root@95.216.137.189 "ip addr add 95.216.137.189 dev eth0"
       - run: mkdir -p ~/.ssh/ && ssh-keyscan -H $95.216.137.189 >> ~/.ssh/known_hosts
       - run: ssh root@95.216.137.189 touch elivelton_was_here
       - run: ssh root@95.216.137.189 ls
