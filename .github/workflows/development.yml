@@ -10,19 +10,10 @@ jobs:
   build:
     runs-on: ubuntu-20.04
     steps:
-      - uses: TimDaub/hetzner-cloud-deploy-server-action@v2
-        with:
-          server-name: "eliveltontech"
-          server-image: "ubuntu-20.04"
-          server-type: "cx31"
-          ssh-key-name: "eliveltonmarques@git"
-          hcloud-token: ${{ secrets.HCLOUD_TOKEN }}
-          startup-timeout: 40000
-          delete-server: false
       - uses: webfactory/ssh-agent@v0.5.0
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-      - run: mkdir -p ~/.ssh && ssh-keyscan -H $SERVER_IPV4 >> ~/.ssh/known_hosts
+      - run: mkdir -p ~/.ssh && ssh-keyscan -H 95.216.137.189 >> ~/.ssh/known_hosts
       - run: ssh root@95.216.137.189 "ip addr add 95.216.137.189 dev eth0"
       - run: mkdir -p ~/.ssh/ && ssh-keyscan -H $95.216.137.189 >> ~/.ssh/known_hosts
       - run: ssh root@95.216.137.189 touch elivelton_was_here
